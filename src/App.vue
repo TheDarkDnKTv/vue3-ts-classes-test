@@ -1,10 +1,49 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div>
+    <h2>{{ test }}</h2>
+    <h2>{{ test1 }}</h2>
+    <button @click="check1()">null</button>
+    <button @click="check2()">value</button>
+    <HelloWorld msg="pog"/>
+    <VuexTest/>
   </div>
-  <router-view/>
 </template>
+
+<script lang="ts">
+  import { Vue, Options } from 'vue-class-component';
+  import HelloWorld from "@/components/HelloWorld.vue";
+  import VuexTest from "@/components/VuexTest.vue";
+
+  @Options({
+    components: {
+      HelloWorld, VuexTest
+    }
+  })
+  export default class App extends Vue {
+
+    // Default property
+    private test: string | null = "test"; // set type can be null or undefined
+
+    // Lifecycle hooks
+    created() {
+      console.log("kekw");
+    }
+
+    // Computed properties
+    private get test1() {
+      return this.test?.length;
+    }
+
+    // Methods
+    private check1() {
+      this.test = null;
+    }
+
+    private check2() {
+      this.test = "New value";
+    }
+  }
+</script>
 
 <style lang="scss">
 #app {
